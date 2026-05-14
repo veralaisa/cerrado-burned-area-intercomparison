@@ -1,4 +1,4 @@
-```javascript
+
 /**
  * @file
  * Computes annual burned area agreement among MODIS MCD64A1,
