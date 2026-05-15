@@ -63,8 +63,6 @@ The analysis covers the Brazilian Cerrado biome, using the official biome bounda
 │   ├── 04_agreement_classes_trend_summary.py
 │   ├── 05_lulc_burned_area_analysis.py
 │   └── 06_native_vegetation_fire_maps.py
-└── docs/
-    ├── figures/
 ```
 
 
