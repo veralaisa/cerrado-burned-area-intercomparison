@@ -1,4 +1,3 @@
-
 # =============================================================================
 # CONCORDANCE INDEX DISTRIBUTION
 # =============================================================================
@@ -95,8 +94,6 @@ stats = (
 # ADD STATISTICAL ANNOTATIONS
 # -----------------------------------------------------------------------------
 
-ymin, ymax = ax.get_ylim()
-
 for _, row in stats.iterrows():
 
     annotation = (
@@ -157,4 +154,3 @@ plt.savefig(
 plt.show()
 
 print(f'Figure exported to:\n{output_path}')
-```
