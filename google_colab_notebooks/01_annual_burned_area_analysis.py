@@ -1,4 +1,3 @@
-
 # =============================================================================
 # INITIAL SETUP
 # =============================================================================
@@ -19,6 +18,8 @@ import seaborn as sns
 
 import gspread
 
+from pathlib import Path
+
 from gspread_dataframe import (
     set_with_dataframe,
     get_as_dataframe
@@ -33,10 +34,8 @@ from google.auth import default
 # GOOGLE AUTHENTICATION
 # =============================================================================
 
-# Authenticate Google account
 auth.authenticate_user()
 
-# Configure Google Sheets access
 creds, _ = default()
 
 scoped_creds = creds.with_scopes([
@@ -45,34 +44,64 @@ scoped_creds = creds.with_scopes([
 
 gc = gspread.authorize(scoped_creds)
 
-# Mount Google Drive
 drive.mount('/content/drive')
+
+# =============================================================================
+# PROJECT DIRECTORIES
+# =============================================================================
+
+PROJECT_DIR = (
+    '/content/drive/MyDrive/'
+    'cerrado-burned-area-intercomparison'
+)
+
+GEE_EXPORTS_DIR = f'{PROJECT_DIR}/gee_exports'
+GEE_TABLES_DIR = f'{GEE_EXPORTS_DIR}/tables'
+GEE_RASTERS_DIR = f'{GEE_EXPORTS_DIR}/rasters'
+
+COLAB_OUTPUTS_DIR = f'{PROJECT_DIR}/colab_outputs'
+FIGURES_DIR = f'{COLAB_OUTPUTS_DIR}/figures'
+TABLES_DIR = f'{COLAB_OUTPUTS_DIR}/tables'
+
+NOTEBOOKS_DIR = f'{PROJECT_DIR}/notebooks'
+
+directories = [
+    PROJECT_DIR,
+    GEE_EXPORTS_DIR,
+    GEE_TABLES_DIR,
+    GEE_RASTERS_DIR,
+    COLAB_OUTPUTS_DIR,
+    FIGURES_DIR,
+    TABLES_DIR,
+    NOTEBOOKS_DIR
+]
+
+for directory in directories:
+    Path(directory).mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+print('Project directories created successfully.')
 
 # =============================================================================
 # LOAD GOOGLE SHEETS DATA
 # =============================================================================
 
-# Google Sheets file ID
 sheet_id = (
     '165LaEdfVqPOhAHbeBYEWAM5KDnji6DWm5zUoba-Of4Y'
 )
 
-# Open spreadsheet
 spreadsheet = gc.open_by_key(sheet_id)
 
-# Select worksheet
 worksheet = spreadsheet.worksheet('Annual')
 
-# Load worksheet as DataFrame
 df = get_as_dataframe(
     worksheet,
     evaluate_formulas=True
 )
 
-# Remove empty rows and columns
 df = df.dropna(how='all')
 df = df.dropna(axis=1, how='all')
 
-# Preview data
-df.head()
-```
+print(df.head())
