@@ -52,15 +52,21 @@ The analysis covers the Brazilian Cerrado biome, using the official biome bounda
 
 ## Repository Structure
 
-```text id="r2h7vd"
+```text
 .
 ├── README.md
 ├── gee/
-│   ├── preprocessing/
-│   └── exports/
-└── google_colab_notebooks/
-    ├── burned_area_statistics.ipynb
+├── google_colab_notebooks/
+│   ├── 01_annual_burned_area_analysis.py
+│   ├── 02_concordance_index_distribution.py
+│   ├── 03_spatial_agreement_map_panel.py
+│   ├── 04_agreement_classes_trend_summary.py
+│   ├── 05_lulc_burned_area_analysis.py
+│   └── 06_native_vegetation_fire_maps.py
+└── docs/
+    ├── figures/
 ```
+
 
 ### Folder Description
 
